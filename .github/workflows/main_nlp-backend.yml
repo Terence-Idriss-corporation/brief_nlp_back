@@ -1,0 +1,51 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - nlp-backend
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to registry
+      uses: docker/login-action@v2
+      with:
+        registry: https://brief0nlp0conteneur.azurecr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_28193d40bd8c403f8a453dae6651672c }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_3b0388990afd464fbee9b2a743a11d57 }}
+
+    - name: Build and push container image to registry
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: brief0nlp0conteneur.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_28193d40bd8c403f8a453dae6651672c }}/back:${{ github.sha }}
+        file: ./Dockerfile
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'nlp-backend'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_4643e0be11a44b299077034416b18150 }}
+        images: 'brief0nlp0conteneur.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_28193d40bd8c403f8a453dae6651672c }}/back:${{ github.sha }}'
