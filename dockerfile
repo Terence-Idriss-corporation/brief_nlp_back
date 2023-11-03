@@ -21,4 +21,4 @@ VOLUME /app/src
 EXPOSE 8000
 
 # Définir la commande pour exécuter l'application
-CMD ["python", "/app/src/manage.py", "runserver --settings=src.settings_deployment", "0.0.0.0:8000"]
+CMD ["python", "/app/src/manage.py", "runserver", "0.0.0.0:8000"]
