@@ -13,6 +13,7 @@ class Film(models.Model):
         db_table = 'films'
     
 class Commentaire(models.Model):
+    pseudo = models.TextField(null=True)
     commentaire = models.TextField()
     note = models.IntegerField()
     note_like = models.IntegerField()
