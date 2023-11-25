@@ -16,8 +16,6 @@ class Commentaire(models.Model):
     pseudo = models.TextField(null=True)
     commentaire = models.TextField()
     note = models.IntegerField()
-    note_like = models.IntegerField()
-    note_dislike = models.IntegerField()
 
     def __str__(self):
         return self.commentaire
