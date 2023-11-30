@@ -27,7 +27,7 @@ class Commentaire(models.Model):
     
 class NLP(models.Model):
     model = models.CharField(max_length=255)
-    film = models.ForeignKey(Film, on_delete=models.CASCADE)
+    titre_film = models.CharField(null=True, max_length=100)
     note = models.FloatField()
 
     def __str__(self):
