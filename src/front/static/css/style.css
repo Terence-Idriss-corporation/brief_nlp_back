@@ -152,6 +152,8 @@ header {
 
 	align-items: stretch;
 	outline: var(--outline-width) solid lime;
+
+	position: relative;
 }
 
 .card__content > div {
@@ -209,4 +211,12 @@ aside {
 
 aside p {
 	margin-bottom: 1em;
+}
+
+.titre-centre {
+    position: absolute;
+    top: 20%;  /* Ajustez cette valeur pour déplacer la div plus haut ou plus bas. */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
