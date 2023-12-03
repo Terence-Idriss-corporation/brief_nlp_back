@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <header>
+            <div>
+                <h1>TOP 10 des meilleurs films</h1>
+                <p>👇 Faites défiler vers le bas.</p>
+            </div>
+        </header>
+        <main>
+            <ul id="cards">
+                {% for film in films_list %}
+                <li class="card" id="card_{{ forloop.counter }}">
+                    <div class="card__content">
+                        <div class="titre-centre"> 
+                            <h1> {{ forloop.counter }} </h1>
+                        </div>
+                        <div>
+                            <h2>{{ film.titre_film }}</h2>
+                            <p>{{ film.note|floatformat:2 }}</p>
+                            <p><a href={{film.url_film}} class="btn btn--accent">Read more</a></p>
+                        </div>
+                        <figure>
+                            <img src={{film.url_img}} alt="Image description">
+                        </figure>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </main>
+        {% comment %} <aside>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, ipsam molestias. Fuga similique, dolor tempora rerum perferendis ipsam ullam doloribus beatae esse facilis quae sit excepturi expedita non, sunt accusantium magnam? Animi nesciunt nostrum eligendi iusto voluptatum hic qui. Quod distinctio qui nobis et doloremque. Fuga, itaque? Laborum dignissimos nobis quaerat optio voluptatum similique unde, neque cupiditate, vel, fugiat dolore? Accusantium neque deserunt ducimus enim, illum laborum magni ipsam eos optio aspernatur nam necessitatibus quod natus, dolor laboriosam illo velit.</p>
+        </aside> {% endcomment %}
+        <script type="text/javascript" src="{% static 'js/.js' %}"></script>
+    </body>
+</html>
