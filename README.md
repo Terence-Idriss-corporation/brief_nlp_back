@@ -39,5 +39,6 @@ pip install -r requirements.txt
 ___
 ### 3. Lancer le serveur django
 ```
+cd src
 py manage.py runserver
 ```
